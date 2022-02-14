@@ -12,10 +12,10 @@ namespace MvcCoreLinqXML.Repositories
     {
         private XDocument document;
 
-        public RepositoryJoyerias(PathProvider pathProvider)
+        public RepositoryJoyerias()
         {
             string filename = "joyerias.xml";
-            string path = pathProvider.MapPath(filename, Folders.Documents);
+            string path = PathProvider.MapPath(filename, Folders.Documents);
             this.document = XDocument.Load(path);
         }
 

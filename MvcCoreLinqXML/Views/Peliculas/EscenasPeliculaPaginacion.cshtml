@@ -1,0 +1,57 @@
+﻿@model MvcCoreLinqXML.Models.Escenas
+
+@{
+    ViewData["Title"] = "EscenasPeliculaPaginacion";
+}
+
+<h1>EscenasPeliculaPaginacion</h1>
+
+<ul class="list-group list-group-horizontal">
+
+    <li class="list-group">
+        <a class="btn btn-outline-warning" asp-controller="Peliculas" asp-action="EscenasPeliculaPaginacion"  asp-route-idpelicula="@Model.IdPelicula" asp-route-posicion="@ViewData["ANTERIOR"]">
+            Anterior
+        </a>
+    </li> &nbsp;&nbsp;
+    <li class="list-group">
+        <a class="btn btn-outline-success" asp-controller="Peliculas" asp-action="EscenasPeliculaPaginacion" asp-route-idpelicula="@Model.IdPelicula" asp-route-posicion="@ViewData["SIGUIENTE"]">
+            Siguiente
+        </a>
+    </li> &nbsp;&nbsp;
+
+</ul>
+
+<div>
+    <h4>Escenas</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdPelicula)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdPelicula)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Desripcion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Desripcion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Imagen)
+        </dt>
+        <dd class = "col-sm-10">
+            <img src="@Model.Imagen" style="max-height:250px ; max-width:150px;" class="img-fluid" />        
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

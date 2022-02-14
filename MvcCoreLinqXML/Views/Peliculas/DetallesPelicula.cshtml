@@ -1,0 +1,66 @@
+﻿@model MvcCoreLinqXML.Models.Pelicula
+
+@{
+    ViewData["Title"] = "DetallesPelicula";
+}
+
+
+<h1>DetallesPelicula</h1>
+
+<div>
+    <h4>Pelicula</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdPelicula)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdPelicula)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TituloOriginal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TituloOriginal)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Poster)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Model.Poster" style="max-height:250px ; max-width:150px;" class="img-fluid" />
+        </dd>
+    </dl>
+</div>
+
+<div id="escenas" style="background-color:lightcyan">
+
+</div>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            var request = '/Peliculas/_EscenasPeliculaPaginacionPartial?idpelicula=' + @Model.IdPelicula +'&posicion=0 ';
+                $("#escenas").load(request);         
+        });
+
+       
+
+        //$(function () {
+        //    $('#peliModal').modal();
+        //});
+        
+    </script>
+}

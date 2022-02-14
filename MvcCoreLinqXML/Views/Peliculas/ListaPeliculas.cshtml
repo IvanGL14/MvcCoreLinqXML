@@ -48,10 +48,13 @@
                 @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
             <td>
-                <img src="@item.Poster" style="max-height:100px ; max-width:100px;" class="img-fluid"/>
+                <img src="@item.Poster" style="max-height:250px ; max-width:150px;" class="img-fluid"/>
             </td>
             <td>
-                <a asp-controller="Peliculas" asp-action="EscenasPelicula" asp-route-idpelicula="@item.IdPelicula" class="btn btn-info">Ver escenas</a>
+                <a asp-controller="Peliculas" asp-action="DetallesPelicula" asp-route-idpelicula="@item.IdPelicula" class="btn btn-info">Ver peli</a>
+                &nbsp;
+                &nbsp;
+                <a asp-controller="Peliculas" asp-action="EscenasPeliculaPaginacion" asp-route-idpelicula="@item.IdPelicula" class="btn btn-danger">Ver escenas paginada</a>
             </td>
         </tr>
 }

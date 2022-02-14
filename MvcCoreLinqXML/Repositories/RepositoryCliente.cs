@@ -13,9 +13,9 @@ namespace MvcCoreLinqXML.Repositories
         private XDocument document;
         private string path;
 
-        public RepositoryCliente(PathProvider pathProvider)
+        public RepositoryCliente()
         {
-            this.path = pathProvider.MapPath("ClientesID.xml", Folders.Documents);
+            this.path = PathProvider.MapPath("ClientesID.xml", Folders.Documents);
             this.document = XDocument.Load(path);
         }
 

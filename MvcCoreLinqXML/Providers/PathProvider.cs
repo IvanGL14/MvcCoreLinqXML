@@ -11,16 +11,23 @@ namespace MvcCoreLinqXML.Providers
     {
         Images = 0, Documents = 1
     }
-    public class PathProvider
+    public static class PathProvider
     {
-        private IWebHostEnvironment environment;
+        private static IWebHostEnvironment environment;
 
-        public PathProvider(IWebHostEnvironment environment)
+        //public PathProvider(IWebHostEnvironment environment)
+        //{
+        //    this.environment = environment;
+        //}
+
+        public static void Initialize(IWebHostEnvironment hostEnvironment)
         {
-            this.environment = environment;
+            environment = hostEnvironment;
         }
 
-        public string MapPath(string filename, Folders folder)
+
+
+        public static string MapPath(string filename, Folders folder)
         {
             string carpeta = "";
 
@@ -33,7 +40,7 @@ namespace MvcCoreLinqXML.Providers
                 carpeta = "documents";
             }
 
-            string path = Path.Combine(this.environment.WebRootPath, carpeta, filename);
+            string path = Path.Combine(environment.WebRootPath, carpeta, filename);
             
             return path;
         }
