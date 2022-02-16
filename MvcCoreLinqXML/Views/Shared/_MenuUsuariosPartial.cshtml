@@ -1,0 +1,19 @@
+﻿@if (Context.User.Identity.IsAuthenticated == false)
+{
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Manage" asp-action="Login">Login</a>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Curso" asp-action="MiPerfil">Mi perfil</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Curso" asp-action="CompañerosCurso" asp-route-idcurso="@Context.User.FindFirst("Curso").Value">Compis</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-danger" asp-controller="Manage" asp-action="Logout">Logout, @Context.User.Identity.Name</a>
+    </li>
+
+}

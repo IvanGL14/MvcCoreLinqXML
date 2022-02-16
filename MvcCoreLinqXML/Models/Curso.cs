@@ -7,7 +7,7 @@ namespace MvcCoreLinqXML.Models
 {
     public class Curso
     {
-        public int IdCurso { get; set; }
+        public string IdCurso { get; set; }
         public string Titulo { get; set; }
         public string Edicion { get; set; }
         public string Turno { get; set; }

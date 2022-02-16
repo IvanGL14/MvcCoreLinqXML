@@ -1,0 +1,8 @@
+﻿<h1 style="color: royalblue">Bienvenido a tu perfil, @Context.User.Identity.Name</h1>
+
+<h3 style="color: mediumvioletred">
+    Rol:  @Context.User.FindFirst(ClaimTypes.Role).Value
+</h3>
+<h3 style="color: mediumvioletred">
+    Id:  @Context.User.FindFirst(ClaimTypes.NameIdentifier).Value
+</h3>

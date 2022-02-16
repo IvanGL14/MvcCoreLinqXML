@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,10 +26,34 @@ namespace MvcCoreLinqXML
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+            services.AddAuthorization(options =>
+            {
+                //VAMOS A CREAR UNA POLITICA DE ACCESO POR ROLES
+                //options.AddPolicy("PermisosElevados", policy => policy.RequireRole("CARDIOLOGIA", "DIAGNOSTICO"));
+                //options.AddPolicy("AdminOnly", policy => policy.RequireClaim("Admin"));
+                //options.AddPolicy("SoloDoctoresRicos", policy => policy.Requirements.Add(new OverSalarioRequirement()));
+
+            });
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(
+                CookieAuthenticationDefaults.AuthenticationScheme, config =>
+                {
+                    config.AccessDeniedPath = "/Manage/ErrorAcceso";
+                });
+
             services.AddTransient<RepositoryJoyerias>();
             services.AddTransient<RepositoryCliente>();
             services.AddTransient<RepositoryPeliculas>();
-            services.AddControllersWithViews();
+            services.AddTransient<RepositoryCurso>();
+
+            services.AddControllersWithViews(options => options.EnableEndpointRouting = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,14 +74,22 @@ namespace MvcCoreLinqXML
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            app.UseSession();
+            app.UseMvc(routes =>
             {
-                endpoints.MapControllerRoute(
+                //routes.MapRoute(
+                //   name: "Enfermo",
+                //   template: "{controller=Hospital}/{action=EliminarEnfermo}/{inscripcion?}"
+                //   );
+
+                routes.MapRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}"
+                    );
+
             });
         }
     }
