@@ -45,9 +45,10 @@ namespace MvcCoreLinqXML.Repositories
             return usuarios;
         }
 
-        public List<Curso> GetCursos()
+        public List<Curso> GetCursos(/*int idcurso*/)
         {
             var consulta = from datos in this.docuCursos.Descendants("curso")
+                           //where datos.Parent.Attribute("idcurso").Value == idcurso.ToString()
                            select datos;
             List<Curso> cursos = new List<Curso>();
 
